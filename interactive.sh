@@ -30,15 +30,13 @@ declare -a VALUES
 # Prompt for each field
 for i in "${!HEADER_ARRAY[@]}"; do
     FIELD="${HEADER_ARRAY[$i]}"
-    # Remove any quotes or whitespace from field name
-    FIELD=$(echo "$FIELD" | sed 's/"//g' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
-    
+    # Remove any quotes or whitespace from field name    
     echo -n "$FIELD: "
     read -r VALUE
     
     # Escape any quotes in the value and wrap in quotes if it contains commas
     if [[ "$VALUE" == *","* ]] || [[ "$VALUE" == *"\""* ]]; then
-        VALUE=$(echo "$VALUE" | sed 's/"/""/g')
+        VALUE=$(echo "$VALUE")
         VALUE="\"$VALUE\""
     fi
     
